@@ -16,10 +16,6 @@ import pens.lab.app.belajaractivity.base.BaseFragment;
 import pens.lab.app.belajaractivity.modul.profile.ProfileActivity;
 
 
-/**
- * Created by fahrul on 13/03/19.
- */
-
 public class LoginFragment extends BaseFragment<LoginActivity, LoginContract.Presenter> implements LoginContract.View {
 
     EditText etEmail;
@@ -49,7 +45,7 @@ public class LoginFragment extends BaseFragment<LoginActivity, LoginContract.Pre
             }
         });
 
-        setTitle("Login Page");
+        setTitle(getResources().getString(R.string.login_title));
 
         return fragmentView;
     }

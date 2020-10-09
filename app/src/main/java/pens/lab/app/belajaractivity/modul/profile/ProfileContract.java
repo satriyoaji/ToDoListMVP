@@ -9,7 +9,9 @@ import pens.lab.app.belajaractivity.base.BaseView;
 
 public interface ProfileContract {
     interface View extends BaseView<Presenter> {
+        void goBackToLogin();
 
+        void setProfileAttribute(String email, String password);
     }
 
     interface Presenter extends BasePresenter {

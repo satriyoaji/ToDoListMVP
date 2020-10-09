@@ -1,8 +1,5 @@
 package pens.lab.app.belajaractivity.modul.profile;
 
-/**
- * Created by fahrul on 13/03/19.
- */
 
 public class ProfilePresenter implements ProfileContract.Presenter{
     private final ProfileContract.View view;
@@ -12,6 +9,8 @@ public class ProfilePresenter implements ProfileContract.Presenter{
     }
 
     @Override
-    public void start() {}
+    public void start() {
+
+    }
 
 }

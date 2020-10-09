@@ -16,12 +16,18 @@ public class ProfileActivity extends BaseFragmentHolderActivity {
     protected void initializeFragment() {
         initializeView();
 
-        btBack.setVisibility(View.GONE);
+        btBack.setVisibility(View.VISIBLE);
         btOptionMenu.setVisibility(View.GONE);
 //        ivIcon.setImageResource(R.drawable.....);
         ivIcon.setVisibility(View.VISIBLE);
 
         profileFragment = new ProfileFragment();
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                profileFragment.goBackToLogin();
+            }
+        });
         setCurrentFragment(profileFragment, false);
 
         Intent intent = getIntent();

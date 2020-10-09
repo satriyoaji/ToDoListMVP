@@ -13,13 +13,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import pens.lab.app.belajaractivity.R;
 import pens.lab.app.belajaractivity.base.BaseFragment;
+import pens.lab.app.belajaractivity.modul.login.LoginActivity;
 import pens.lab.app.belajaractivity.modul.login.LoginFragment;
 
 
 public class ProfileFragment extends BaseFragment<ProfileActivity, ProfileContract.Presenter> implements ProfileContract.View {
 
-    EditText dataEmail, dataPassword;
-    TextView tvEmail, tvPassword;
+    private EditText dataEmail, dataPassword;
+    private TextView tvEmail, tvPassword;
     private String emailData, passwordData;
 
     public ProfileFragment() {
@@ -32,7 +33,7 @@ public class ProfileFragment extends BaseFragment<ProfileActivity, ProfileContra
         fragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
         mPresenter = new ProfilePresenter(this);
         mPresenter.start();
-        setTitle("Profile Page");
+        setTitle(getResources().getString(R.string.profile_title));
 
         dataEmail = fragmentView.findViewById(R.id.data_email);
         dataPassword = fragmentView.findViewById(R.id.data_password);
@@ -45,18 +46,21 @@ public class ProfileFragment extends BaseFragment<ProfileActivity, ProfileContra
         return fragmentView;
     }
 
-    public void setProfileAttribute(String email, String password) {
-        this.emailData = email;
-        this.passwordData = password;
-    }
-
-    public void setBtLoginClick(){
-    }
-
     @Override
     public void setPresenter(ProfileContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
+    @Override
+    public void goBackToLogin() {
+        Intent intent = new Intent(activity, LoginActivity.class);
+        startActivity(intent);
+        activity.finish();
+    }
 
+    @Override
+    public void setProfileAttribute(String email, String password) {
+        this.emailData = email;
+        this.passwordData = password;
+    }
 }
