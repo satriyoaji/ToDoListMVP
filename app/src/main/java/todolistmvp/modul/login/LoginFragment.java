@@ -1,4 +1,4 @@
-package pens.lab.app.belajaractivity.modul.login;
+package todolistmvp.modul.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +10,9 @@ import android.widget.EditText;
 
 
 import androidx.annotation.Nullable;
-import pens.lab.app.belajaractivity.FirstActivity;
 import pens.lab.app.belajaractivity.R;
-import pens.lab.app.belajaractivity.base.BaseFragment;
-import pens.lab.app.belajaractivity.modul.profile.ProfileActivity;
+import todolistmvp.base.BaseFragment;
+import todolistmvp.modul.home.HomeActivity;
 
 
 public class LoginFragment extends BaseFragment<LoginActivity, LoginContract.Presenter> implements LoginContract.View {
@@ -63,9 +62,8 @@ public class LoginFragment extends BaseFragment<LoginActivity, LoginContract.Pre
 
     @Override
     public void redirectToProfile() {
-        Intent intent = new Intent(activity, ProfileActivity.class);
+        Intent intent = new Intent(activity, HomeActivity.class);
         intent.putExtra(KEY_EMAIL, etEmail.getText().toString());
-        intent.putExtra(KEY_PASSWORD, etPassword.getText().toString());
         startActivity(intent);
         activity.finish();
     }

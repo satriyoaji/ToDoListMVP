@@ -1,18 +1,16 @@
-package pens.lab.app.belajaractivity.modul.profile;
+package todolistmvp.modul.home;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 
-import pens.lab.app.belajaractivity.base.BaseFragmentHolderActivity;
-import pens.lab.app.belajaractivity.modul.login.LoginFragment;
+import todolistmvp.base.BaseFragmentHolderActivity;
+import todolistmvp.modul.login.LoginFragment;
 
 
-public class ProfileActivity extends BaseFragmentHolderActivity {
-    ProfileFragment profileFragment;
+public class HomeActivity extends BaseFragmentHolderActivity {
+    HomeFragment homeFragment;
     private final int UPDATE_REQUEST = 2019;
 
-    @Override
     protected void initializeFragment() {
         initializeView();
 
@@ -21,20 +19,20 @@ public class ProfileActivity extends BaseFragmentHolderActivity {
 //        ivIcon.setImageResource(R.drawable.....);
         ivIcon.setVisibility(View.VISIBLE);
 
-        profileFragment = new ProfileFragment();
+        homeFragment = new HomeFragment();
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                profileFragment.goBackToLogin();
+                homeFragment.goBackToLogin();
             }
         });
-        setCurrentFragment(profileFragment, false);
+        setCurrentFragment(homeFragment, false);
 
         Intent intent = getIntent();
         String emailText = intent.getStringExtra(LoginFragment.KEY_EMAIL);
         String passwordText = intent.getStringExtra(LoginFragment.KEY_PASSWORD);
 
-        profileFragment.setProfileAttribute(emailText, passwordText);
+        homeFragment.setProfileAttribute(emailText, passwordText);
     }
 
 }

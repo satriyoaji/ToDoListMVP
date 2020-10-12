@@ -1,29 +1,27 @@
-package pens.lab.app.belajaractivity.modul.profile;
+package todolistmvp.modul.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+
 import pens.lab.app.belajaractivity.R;
-import pens.lab.app.belajaractivity.base.BaseFragment;
-import pens.lab.app.belajaractivity.modul.login.LoginActivity;
-import pens.lab.app.belajaractivity.modul.login.LoginFragment;
+import todolistmvp.base.BaseFragment;
+import todolistmvp.modul.login.LoginActivity;
 
 
-public class ProfileFragment extends BaseFragment<ProfileActivity, ProfileContract.Presenter> implements ProfileContract.View {
+public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presenter> implements HomeContract.View {
 
     private EditText dataEmail, dataPassword;
     private TextView tvEmail, tvPassword;
     private String emailData, passwordData;
 
-    public ProfileFragment() {
+    public HomeFragment() {
     }
 
     @Nullable
@@ -31,7 +29,7 @@ public class ProfileFragment extends BaseFragment<ProfileActivity, ProfileContra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         fragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
-        mPresenter = new ProfilePresenter(this);
+        mPresenter = new HomePresenter(this);
         mPresenter.start();
         setTitle(getResources().getString(R.string.profile_title));
 
@@ -47,7 +45,7 @@ public class ProfileFragment extends BaseFragment<ProfileActivity, ProfileContra
     }
 
     @Override
-    public void setPresenter(ProfileContract.Presenter presenter) {
+    public void setPresenter(HomeContract.Presenter presenter) {
         mPresenter = presenter;
     }
 

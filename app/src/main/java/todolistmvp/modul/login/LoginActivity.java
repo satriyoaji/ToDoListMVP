@@ -1,8 +1,8 @@
-package pens.lab.app.belajaractivity.modul.login;
+package todolistmvp.modul.login;
 
 import android.view.View;
 
-import pens.lab.app.belajaractivity.base.BaseFragmentHolderActivity;
+import todolistmvp.base.BaseFragmentHolderActivity;
 
 public class LoginActivity extends BaseFragmentHolderActivity {
     LoginFragment loginFragment;

@@ -1,7 +1,7 @@
-package pens.lab.app.belajaractivity.modul.login;
+package todolistmvp.modul.login;
 
-import pens.lab.app.belajaractivity.base.BasePresenter;
-import pens.lab.app.belajaractivity.base.BaseView;
+import todolistmvp.base.BasePresenter;
+import todolistmvp.base.BaseView;
 
 
 public interface LoginContract {

@@ -1,13 +1,13 @@
-package pens.lab.app.belajaractivity.modul.profile;
+package todolistmvp.modul.home;
 
-import pens.lab.app.belajaractivity.base.BasePresenter;
-import pens.lab.app.belajaractivity.base.BaseView;
+import todolistmvp.base.BasePresenter;
+import todolistmvp.base.BaseView;
 
 /**
  * Created by fahrul on 13/03/19.
  */
 
-public interface ProfileContract {
+public interface HomeContract {
     interface View extends BaseView<Presenter> {
         void goBackToLogin();
 
