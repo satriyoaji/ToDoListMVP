@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:background="@drawable/gradient_navbar"
-        android:layout_height="178dp">
+        android:layout_height="175dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,9 +32,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="@string/app_name"
+                    android:text="@string/username"
                     android:textColor="#fff"
-                    android:textSize="32sp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/subtitlepage"
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp">
-            
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

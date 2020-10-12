@@ -11,7 +11,7 @@ public interface HomeContract {
     interface View extends BaseView<Presenter> {
         void goBackToLogin();
 
-        void setProfileAttribute(String email, String password);
+        void setProfileAttribute(String email);
     }
 
     interface Presenter extends BasePresenter {

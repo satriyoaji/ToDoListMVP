@@ -32,7 +32,7 @@
         <item name="imageTransparentOverlay">@color/pantoneTransparent</item>
     </style>
 
-    <style name="AzureTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AzureTheme"  parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/azurePrimary</item>
         <item name="colorPrimaryDark">@color/azurePrimaryDark</item>
         <item name="tabBackgroundColor">@color/azureMajor</item>

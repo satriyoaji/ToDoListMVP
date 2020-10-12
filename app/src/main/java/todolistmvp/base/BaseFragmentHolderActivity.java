@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import pens.lab.app.belajaractivity.R;
+import todolistmvp.modul.R;
 
 
 public abstract class BaseFragmentHolderActivity extends BaseActivity {
@@ -23,6 +23,7 @@ public abstract class BaseFragmentHolderActivity extends BaseActivity {
     @Override
     protected void initializeView() {
         setContentView(R.layout.base_activity);
+
         tvToolbarTitle = (TextView) findViewById(R.id.tvToolbarTitle);
         flFragmentContainer = (FrameLayout) findViewById(R.id.flFragmentContainer);
         btOptionMenu = (ImageButton) findViewById(R.id.btOptionMenu);
@@ -42,6 +43,5 @@ public abstract class BaseFragmentHolderActivity extends BaseActivity {
     public void setTitle(String title) {
         this.tvToolbarTitle.setText(title);
     }
-
 
 }

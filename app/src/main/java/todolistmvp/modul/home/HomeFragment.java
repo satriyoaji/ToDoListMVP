@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import todolistmvp.base.BaseFragment;
 import todolistmvp.modul.R;
@@ -17,9 +22,12 @@ import todolistmvp.modul.login.LoginActivity;
 
 public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presenter> implements HomeContract.View {
 
-    private EditText dataEmail, dataPassword;
-    private TextView tvEmail, tvPassword;
-    private String emailData, passwordData;
+    private TextView titledoes, descdoes, datedoes;
+    private Button newListBtn;
+    private RecyclerView ourlist;
+//    private ArrayList<ToDoList> lists;
+//    private ToDoListAdapter adapter;
+    private SearchView searchTask;
 
     public HomeFragment() {
     }
@@ -31,15 +39,13 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         fragmentView = inflater.inflate(R.layout.activity_home, container, false);
         mPresenter = new HomePresenter(this);
         mPresenter.start();
-        setTitle(getResources().getString(R.string.home_title));
+        setTitle(getResources().getString(R.string.app_name));
 
-        dataEmail = fragmentView.findViewById(R.id.data_email);
-        dataPassword = fragmentView.findViewById(R.id.data_password);
-        tvEmail = fragmentView.findViewById(R.id.tv_email);
-        tvPassword = fragmentView.findViewById(R.id.tv_password);
-
-        dataEmail.setText(emailData);
-        dataPassword.setText(passwordData);
+        titledoes = fragmentView.findViewById(R.id.titledoes);
+        descdoes = fragmentView.findViewById(R.id.descdoes);
+        datedoes = fragmentView.findViewById(R.id.datedoes);
+        newListBtn = fragmentView.findViewById(R.id.newListBtn);
+        searchTask = fragmentView.findViewById(R.id.searchTask);
 
         return fragmentView;
     }
@@ -57,8 +63,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
     }
 
     @Override
-    public void setProfileAttribute(String email, String password) {
-        this.emailData = email;
-        this.passwordData = password;
+    public void setProfileAttribute(String email) {
+//        this.emailData = email;
     }
 }
