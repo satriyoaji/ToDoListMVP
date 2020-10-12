@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pens.lab.app.belajaractivity">
+    package="todolistmvp.modul">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:label="Belajar Activity"
+        android:label="To Do List App"
         android:theme="@style/AzureTheme">
-        <activity android:name=".modul.profile.ProfileActivity">
-        </activity>
-        <activity android:name=".SecondActivity"></activity>
-        <activity android:name=".FirstActivity"></activity>
-        <activity android:name=".modul.login.LoginActivity">
+        <activity android:name=".home.HomeActivity"/>
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

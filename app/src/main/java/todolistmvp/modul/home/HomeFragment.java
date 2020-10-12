@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import pens.lab.app.belajaractivity.R;
 import todolistmvp.base.BaseFragment;
+import todolistmvp.modul.R;
 import todolistmvp.modul.login.LoginActivity;
 
 
@@ -28,10 +28,10 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        fragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
+        fragmentView = inflater.inflate(R.layout.activity_home, container, false);
         mPresenter = new HomePresenter(this);
         mPresenter.start();
-        setTitle(getResources().getString(R.string.profile_title));
+        setTitle(getResources().getString(R.string.home_title));
 
         dataEmail = fragmentView.findViewById(R.id.data_email);
         dataPassword = fragmentView.findViewById(R.id.data_password);

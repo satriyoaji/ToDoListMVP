@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">BelajarActivity</string>
+    <string name="app_name">To Do List App</string>
     <string name="btn_login">Login</string>
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>
-    <string name="profile_title">Profile Page</string>
+    <string name="home_title">Home Page</string>
     <string name="login_title">Login Page</string>
+    <string name="nowdate">10 Sep 2020</string>
+    <string name="titleTask">Buy Something</string>
+    <string name="dateTask">20 Sep 2020</string>
 </resources>

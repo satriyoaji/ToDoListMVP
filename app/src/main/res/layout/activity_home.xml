@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#A3E1F0E7"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="todolistmvp.modul.home.HomeActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@drawable/gradient_navbar"
+        android:layout_height="178dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp">
+
+                <TextView
+                    android:id="@+id/titlepage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/app_name"
+                    android:textColor="#fff"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/subtitlepage"
+                    android:textSize="16sp"
+                    android:textColor="#f7f5f0"
+                    android:textStyle="bold"
+                    android:text="@string/nowdate"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/newListBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/add_list_btn"
+                android:fontFamily="sans-serif-medium"
+                android:text="+"
+                android:textColor="#fff"
+                android:textSize="35sp"
+                android:layout_marginRight="30dp"
+                android:layout_marginEnd="30dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="-22dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <SearchView
+            android:id="@+id/searchTask"
+            android:paddingHorizontal="5dp"
+            android:layout_width="204dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/searchbar_rounded"
+            android:inputType="text"
+            android:queryHint="search..."
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center_horizontal" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--        <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/ourlist"-->
+    <!--            android:scrollbars="vertical"-->
+    <!--            android:layout_marginTop="25dp"-->
+    <!--            android:layout_marginRight="20dp"-->
+    <!--            android:layout_marginLeft="20dp"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content" />-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp">
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:background="@drawable/rounded_list_card"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toStartOf="@+id/checkdoes"
+                    android:layout_toLeftOf="@+id/checkdoes"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/titledoes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/titleTask"
+                        android:textColor="#0A1458"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/datedoes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/dateTask"
+                        android:textColor="#F2888888"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/checkdoes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="43dp"
+                    android:layout_marginLeft="43dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:buttonTint="@color/calmGreen"
+                    android:scaleX="1.20"
+                    android:scaleY="1.20" />
+
+
+            </RelativeLayout>
+
+            <!--            <LinearLayout-->
+            <!--                android:background="@drawable/rounded_list_card"-->
+            <!--                android:layout_margin="15dp"-->
+            <!--                android:paddingBottom="10dp"-->
+            <!--                android:paddingTop="10dp"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:orientation="horizontal" >-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="260dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginLeft="16dp"-->
+            <!--                    android:orientation="vertical">-->
+
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/titledoes"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="Study in a midnight"-->
+            <!--                        android:textColor="#0A1458"-->
+            <!--                        android:textSize="20sp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/datedoes"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="8dp"-->
+            <!--                        android:text="22 Aug 2020"-->
+            <!--                        android:textColor="#F2888888"-->
+            <!--                        android:textSize="16sp" />-->
+
+            <!--                </LinearLayout>-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_marginLeft="50dp"-->
+            <!--                    android:layout_marginTop="20dp"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content" >-->
+
+            <!--                    <CheckBox-->
+            <!--                        android:id="@+id/checkdoes"-->
+            <!--                        android:scaleX="1.20"-->
+            <!--                        android:scaleY="1.20"-->
+            <!--                        android:checked="true"-->
+            <!--                        android:buttonTint="@color/calmGreen"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content" />-->
+
+            <!--                </LinearLayout>-->
+            <!--            </LinearLayout>-->
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/endpage"
+        android:textSize="16sp"
+        android:textColor="#9A9A9A"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:text="No more list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+
+</LinearLayout>
