@@ -17,7 +17,9 @@ import java.util.ArrayList;
 
 import todolistmvp.base.BaseFragment;
 import todolistmvp.modul.R;
+import todolistmvp.modul.edittask.EditTaskActivity;
 import todolistmvp.modul.login.LoginActivity;
+import todolistmvp.modul.newtask.NewTaskActivity;
 
 
 public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presenter> implements HomeContract.View {
@@ -47,7 +49,26 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         newListBtn = fragmentView.findViewById(R.id.newListBtn);
         searchTask = fragmentView.findViewById(R.id.searchTask);
 
+        newListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewTask();
+            }
+        });
+        titledoes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToTaskDetail();
+            }
+        });
+
         return fragmentView;
+    }
+
+    @Override
+    public void goToTaskDetail() {
+        Intent i = new Intent(activity, EditTaskActivity.class);
+        startActivity(i);
     }
 
     @Override
@@ -58,6 +79,13 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
     @Override
     public void goBackToLogin() {
         Intent intent = new Intent(activity, LoginActivity.class);
+        startActivity(intent);
+        activity.finish();
+    }
+
+    @Override
+    public void createNewTask() {
+        Intent intent = new Intent(activity, NewTaskActivity.class);
         startActivity(intent);
         activity.finish();
     }

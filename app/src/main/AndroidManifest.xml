@@ -10,6 +10,8 @@
         android:label="To Do List App"
         android:theme="@style/AzureTheme">
         <activity android:name=".home.HomeActivity"/>
+        <activity android:name=".newtask.NewTaskActivity"/>
+        <activity android:name=".edittask.EditTaskActivity"/>
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

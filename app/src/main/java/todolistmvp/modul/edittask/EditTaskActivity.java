@@ -1,15 +1,13 @@
-package todolistmvp.modul.home;
+package todolistmvp.modul.edittask;
 
 import android.content.Intent;
 import android.view.View;
-import android.view.Window;
 
 import todolistmvp.base.BaseFragmentHolderActivity;
-import todolistmvp.modul.login.LoginFragment;
 
 
-public class HomeActivity extends BaseFragmentHolderActivity {
-    HomeFragment homeFragment;
+public class EditTaskActivity extends BaseFragmentHolderActivity {
+    EditTaskFragment editTaskFragment;
     private final int UPDATE_REQUEST = 2019;
 
     protected void initializeFragment() {
@@ -19,19 +17,16 @@ public class HomeActivity extends BaseFragmentHolderActivity {
         btOptionMenu.setVisibility(View.GONE);
         ivIcon.setVisibility(View.VISIBLE);
 
-        homeFragment = new HomeFragment();
+        editTaskFragment = new EditTaskFragment();
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homeFragment.goBackToLogin();
+                editTaskFragment.logout();
             }
         });
-        setCurrentFragment(homeFragment, false);
+        setCurrentFragment(editTaskFragment, false);
 
         Intent intent = getIntent();
-        String emailText = intent.getStringExtra(LoginFragment.KEY_EMAIL);
-
-        homeFragment.setProfileAttribute(emailText);
     }
 
 }

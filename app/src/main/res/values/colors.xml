@@ -25,6 +25,7 @@
     <!--Azure color pallette-->
     <color name="azureMajor">#3399ff</color>
     <color name="azureMinor">#77BBFF</color>
+    <color name="azureMajorSurface">#EB4E9EED</color>
     <color name="azureAccent">#FFD799</color>
     <color name="azurePrimary">#007FFF</color>
     <color name="azurePrimaryDark">#002d7f</color>
@@ -39,5 +40,8 @@
     <color name="calmGreen">#F7A7F74C</color>
     <color name="success">#37B83C</color>
     <color name="darkSuccess">#199368</color>
+    <color name="secondaryTextBtn">#AFAFAF</color>
+    <color name="bloodColor">#F5D80911</color>
+    <color name="brightRed">#DAFF0008</color>
 
 </resources>

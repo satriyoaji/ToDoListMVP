@@ -9,4 +9,21 @@
     <string name="titleTask">Buy Something</string>
     <string name="dateTask">20 Sep 2020</string>
     <string name="username">Hai, Ryo Aji</string>
+    <string name="add_new_task_title">New Task</string>
+    <string name="add_title_label">Add Title</string>
+    <string name="title_placeholder">What will you do?</string>
+    <string name="add_description_label">Add Description</string>
+    <string name="description_placeholder">How will you do that?</string>
+    <string name="date_placeholder">When will?</string>
+    <string name="create_task_btn">CREATE NOW</string>
+    <string name="cancelBtn">Cancel</string>
+    <string name="edit_task_details">Edit Task Details</string>
+    <string name="edit_title_label">Edit Title</string>
+    <string name="edit_title_content">Buy something</string>
+    <string name="edit_description_label">Edit Description</string>
+    <string name="edit_description_content">Go to supermarket first</string>
+    <string name="target_date_label">Target Date</string>
+    <string name="target_date_content">2020-10-15</string>
+    <string name="confirmBtn">Sure</string>
+    <string name="delete_confirmation_task">Are you sure to delete this task?</string>
 </resources>

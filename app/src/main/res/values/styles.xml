@@ -37,6 +37,7 @@
         <item name="colorPrimaryDark">@color/azurePrimaryDark</item>
         <item name="tabBackgroundColor">@color/azureMajor</item>
         <item name="toolbarBackgroundColor">@color/azureMinor</item>
+        <item name="colorPrimarySurface">@color/azureMajorSurface</item>
         <item name="textDarkColor">@color/azureRaven</item>
         <item name="textTabColor">@color/azureRaven</item>
         <item name="textWhiteColor">@color/azureLight</item>
