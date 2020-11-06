@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.SearchView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,7 +21,6 @@ import java.util.Locale;
 import todolistmvp.base.BaseFragment;
 import todolistmvp.modul.R;
 import todolistmvp.modul.home.HomeActivity;
-import todolistmvp.modul.home.HomePresenter;
 import todolistmvp.modul.login.LoginActivity;
 
 
@@ -31,7 +28,7 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
 
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
-    private EditText titleTask, descTask, dateTask;
+    private EditText etTitleTask, etDescTask, etDateTask;
     private ImageButton datePickerBtn;
     private Button createTaskBtn, cancelBtn;
 
@@ -42,14 +39,14 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        fragmentView = inflater.inflate(R.layout.activity_new_task, container, false);
+        fragmentView = inflater.inflate(R.layout.fragment_new_task, container, false);
         mPresenter = new NewTaskPresenter(this);
         mPresenter.start();
         setTitle(getResources().getString(R.string.add_new_task_title));
 
-        titleTask = fragmentView.findViewById(R.id.titleTask);
-        descTask = fragmentView.findViewById(R.id.descTask);
-        dateTask = fragmentView.findViewById(R.id.dateTask);
+        etTitleTask = fragmentView.findViewById(R.id.etTitleTask);
+        etDescTask = fragmentView.findViewById(R.id.etDescTask);
+        etDateTask = fragmentView.findViewById(R.id.etDateTask);
         datePickerBtn = fragmentView.findViewById(R.id.datePickerBtn);
         createTaskBtn = fragmentView.findViewById(R.id.createTaskBtn);
         cancelBtn = fragmentView.findViewById(R.id.cancelBtn);
@@ -57,10 +54,16 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancelCreateTask();
+                redirectToTaskList();
             }
         });
 
+        createTaskBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveTask();
+            }
+        });
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         datePickerBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,12 +84,10 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
     @Override
     public void logout() {
         Intent intent = new Intent(activity, LoginActivity.class);
-        //process logout logic
         startActivity(intent);
         activity.finish();
     }
 
-    @Override
     public void showDateDialog() {
         //Calendar untuk mendapatkan tanggal sekarang
         Calendar newCalendar = Calendar.getInstance();
@@ -97,7 +98,7 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
 
-                dateTask.setText(dateFormatter.format(newDate.getTime()));
+                etDateTask.setText(dateFormatter.format(newDate.getTime()));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -105,10 +106,20 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
         datePickerDialog.show();
     }
 
-    @Override
-    public void cancelCreateTask() {
+    public void redirectToTaskList() {
         Intent intent = new Intent(activity, HomeActivity.class);
         startActivity(intent);
         activity.finish();
     }
+
+    public void saveTask(){
+        String title = etTitleTask.getText().toString();
+        String desc = etDescTask.getText().toString();
+        String date = etDateTask.getText().toString();
+        mPresenter.saveData("9",title,desc,date);
+
+        Toast.makeText(getContext(), "The task has successfully added!", Toast.LENGTH_LONG).show();
+        redirectToTaskList();
+    }
+
 }

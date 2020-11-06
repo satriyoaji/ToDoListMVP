@@ -6,7 +6,7 @@ import todolistmvp.base.BaseView;
 
 public interface LoginContract {
     interface View extends BaseView<Presenter> {
-        void redirectToProfile();
+        void redirectToHome();
     }
 
     interface Presenter extends BasePresenter {

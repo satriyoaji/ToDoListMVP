@@ -1,6 +1,5 @@
 package todolistmvp.modul.edittask;
 
-import android.content.Intent;
 import android.view.View;
 
 import todolistmvp.base.BaseFragmentHolderActivity;
@@ -8,7 +7,7 @@ import todolistmvp.base.BaseFragmentHolderActivity;
 
 public class EditTaskActivity extends BaseFragmentHolderActivity {
     EditTaskFragment editTaskFragment;
-    private final int UPDATE_REQUEST = 2019;
+//    private final int UPDATE_REQUEST = 2019;
 
     protected void initializeFragment() {
         initializeView();
@@ -18,6 +17,9 @@ public class EditTaskActivity extends BaseFragmentHolderActivity {
         ivIcon.setVisibility(View.VISIBLE);
 
         editTaskFragment = new EditTaskFragment();
+        String id = getIntent().getStringExtra("TaskId");
+
+        editTaskFragment.setTaskId(id);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,7 +28,6 @@ public class EditTaskActivity extends BaseFragmentHolderActivity {
         });
         setCurrentFragment(editTaskFragment, false);
 
-        Intent intent = getIntent();
     }
 
 }

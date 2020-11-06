@@ -1,21 +1,18 @@
 package todolistmvp.modul.home;
 
+import java.util.ArrayList;
+
 import todolistmvp.base.BasePresenter;
 import todolistmvp.base.BaseView;
-
-/**
- * Created by fahrul on 13/03/19.
- */
+import todolistmvp.data.model.Task;
 
 public interface HomeContract {
     interface View extends BaseView<Presenter> {
-        void goBackToLogin();
         void createNewTask();
-        void setProfileAttribute(String email);
-        void goToTaskDetail();
+        void editTask(String id);
     }
 
     interface Presenter extends BasePresenter {
-        
+        ArrayList<Task> getDataSet();
     }
 }

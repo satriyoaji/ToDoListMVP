@@ -1,6 +1,5 @@
 package todolistmvp.modul.edittask;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -21,6 +20,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import todolistmvp.base.BaseFragment;
+import todolistmvp.data.model.Task;
 import todolistmvp.modul.R;
 import todolistmvp.modul.home.HomeActivity;
 import todolistmvp.modul.login.LoginActivity;
@@ -30,7 +30,8 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
 
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
-    private EditText titleTask, descTask, dateTask;
+    private EditText etTitleTask, etDescTask, etDateTask;
+    private String id;
     private ImageButton datePickerBtn;
     private Button updateTaskBtn, deleteTaskBtn;
 
@@ -41,25 +42,28 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        fragmentView = inflater.inflate(R.layout.activity_edit_task, container, false);
+        fragmentView = inflater.inflate(R.layout.fragment_edit_task, container, false);
         mPresenter = new EditTaskPresenter(this);
         mPresenter.start();
         setTitle(getResources().getString(R.string.edit_task_details));
 
-        titleTask = fragmentView.findViewById(R.id.titleTask);
-        descTask = fragmentView.findViewById(R.id.descTask);
-        dateTask = fragmentView.findViewById(R.id.dateTask);
-        dateTask.setKeyListener(null);
+        etTitleTask = fragmentView.findViewById(R.id.etTitleTask);
+        etDescTask = fragmentView.findViewById(R.id.etDescTask);
+        etDateTask = fragmentView.findViewById(R.id.etDateTask);
+
         datePickerBtn = fragmentView.findViewById(R.id.datePickerBtn);
         updateTaskBtn = fragmentView.findViewById(R.id.updateTaskBtn);
         deleteTaskBtn = fragmentView.findViewById(R.id.deleteTaskBtn);
 
         //get Value from selected task
+        mPresenter.loadData(this.id);
 
         deleteTaskBtn.setOnClickListener(new View.OnClickListener() {
+            private String id = getTaskId();
+
             @Override
             public void onClick(View v) {
-                showDeleteDialog();
+                mPresenter.deleteData(id);
             }
         });
 
@@ -86,6 +90,21 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         mPresenter = presenter;
     }
 
+    public void setTaskId(String id) {
+        this.id = id;
+    }
+
+    public String getTaskId() {
+        return this.id;
+    }
+
+    @Override
+    public void redirectToTaskList() {
+        Intent intent = new Intent(activity, HomeActivity.class);
+        startActivity(intent);
+        activity.finish();
+    }
+
     @Override
     public void logout() {
         Intent intent = new Intent(activity, LoginActivity.class);
@@ -94,7 +113,6 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         activity.finish();
     }
 
-    @Override
     public void showDateDialog() {
         //Calendar untuk mendapatkan tanggal sekarang
         Calendar newCalendar = Calendar.getInstance();
@@ -105,7 +123,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
 
-                dateTask.setText(dateFormatter.format(newDate.getTime()));
+                etDateTask.setText(dateFormatter.format(newDate.getTime()));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -113,16 +131,25 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         datePickerDialog.show();
     }
 
-    @Override
     public void saveChangeTask() {
-        Intent intent = new Intent(activity, HomeActivity.class);
-        startActivity(intent);
+        String title = etTitleTask.getText().toString();
+        String date = etDateTask.getText().toString();
+        String description = etDescTask.getText().toString();
+        mPresenter.saveData(this.id,title,date,description);
+
         Toast.makeText(getContext(), "The task has successfully updated!", Toast.LENGTH_LONG).show();
-        activity.finish();
+        redirectToTaskList();
     }
 
     @Override
-    public void showDeleteDialog() {
+    public void showData(Task task) {
+        this.etTitleTask.setText(task.getTitle());
+        this.etDescTask.setText(task.getDesc());
+        this.etDateTask.setText(task.getDate());
+    }
+
+    @Override
+    public void deleteProcess(final Task task) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.delete_dialog, null);
 
@@ -137,9 +164,8 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         accDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(activity, HomeActivity.class);
-                startActivity(i);
-                Toast.makeText(getContext(), "The task has successfully deleted!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), ("Task "+ task.getId() +" has successfully deleted!"), Toast.LENGTH_LONG).show();
+                redirectToTaskList();
             }
         });
         cancelBtnTask.setOnClickListener(new View.OnClickListener() {

@@ -1,8 +1,6 @@
 package todolistmvp.modul.home;
 
-import android.content.Intent;
 import android.view.View;
-import android.view.Window;
 
 import todolistmvp.base.BaseFragmentHolderActivity;
 import todolistmvp.modul.login.LoginFragment;
@@ -10,7 +8,7 @@ import todolistmvp.modul.login.LoginFragment;
 
 public class HomeActivity extends BaseFragmentHolderActivity {
     HomeFragment homeFragment;
-    private final int UPDATE_REQUEST = 2019;
+//    private final int UPDATE_REQUEST = 2019;
 
     protected void initializeFragment() {
         initializeView();
@@ -23,15 +21,14 @@ public class HomeActivity extends BaseFragmentHolderActivity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homeFragment.goBackToLogin();
+                homeFragment.logout();
             }
         });
+
         setCurrentFragment(homeFragment, false);
 
-        Intent intent = getIntent();
-        String emailText = intent.getStringExtra(LoginFragment.KEY_EMAIL);
-
-        homeFragment.setProfileAttribute(emailText);
+        String emailText = getIntent().getStringExtra(LoginFragment.KEY_EMAIL);
+        homeFragment.setUsername(emailText);
     }
 
 }

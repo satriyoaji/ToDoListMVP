@@ -9,7 +9,7 @@ import todolistmvp.modul.login.LoginFragment;
 
 public class NewTaskActivity extends BaseFragmentHolderActivity {
     NewTaskFragment newTaskFragment;
-    private final int UPDATE_REQUEST = 2019;
+//    private final int UPDATE_REQUEST = 2019;
 
     protected void initializeFragment() {
         initializeView();
@@ -27,7 +27,6 @@ public class NewTaskActivity extends BaseFragmentHolderActivity {
         });
         setCurrentFragment(newTaskFragment, false);
 
-        Intent intent = getIntent();
     }
 
 }

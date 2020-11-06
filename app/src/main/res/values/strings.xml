@@ -26,4 +26,5 @@
     <string name="target_date_content">2020-10-15</string>
     <string name="confirmBtn">Sure</string>
     <string name="delete_confirmation_task">Are you sure to delete this task?</string>
+    <string name="noMoreList">No more list</string>
 </resources>

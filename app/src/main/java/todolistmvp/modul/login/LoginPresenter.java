@@ -14,8 +14,8 @@ public class LoginPresenter implements LoginContract.Presenter{
     @Override
     public void performLogin(final String email, final String password){
         //proses login
-        //if login success call redirect to profile
-        view.redirectToProfile();
+        //if login success call redirect to home
+        view.redirectToHome();
     }
 
 }

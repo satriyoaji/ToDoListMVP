@@ -7,7 +7,7 @@
     android:background="#A3E9F7EF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".edittask.EditTaskActivity">
+    tools:context="todolistmvp.modul.newtask.NewTaskActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -19,9 +19,9 @@
             android:id="@+id/titlepage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="35dp"
             android:textAlignment="center"
-            android:text="@string/edit_task_details"
+            android:text="@string/add_new_task_title"
             android:textColor="#fff"
             android:textSize="27sp"
             android:textStyle="bold"
@@ -33,7 +33,7 @@
         android:background="@drawable/rounded_list_card"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
-        android:layout_marginTop="-57dp"
+        android:layout_marginTop="-60dp"
         android:paddingBottom="12dp"
         android:paddingTop="12dp"
         android:layout_width="match_parent"
@@ -48,23 +48,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/edittitleTv"
+                android:id="@+id/addtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/edit_title_label"
+                android:text="@string/add_title_label"
                 android:layout_marginBottom="10dp"
                 android:textColor="#0A1458"
                 android:textSize="19sp" />
 
             <EditText
-                android:id="@+id/titleTask"
+                android:id="@+id/etTitleTask"
                 android:background="@drawable/input_field_task"
                 android:inputType="text"
                 android:paddingLeft="7dp"
                 android:textColorHint="#B8A3A3"
                 android:textColor="#000"
-                android:maxLength="30"
-                android:text="@string/edit_title_content"
+                android:maxLength="35"
+                android:hint="@string/title_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"/>
 
@@ -79,23 +79,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/editdescTv"
+                android:id="@+id/adddesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/edit_description_label"
+                android:text="@string/add_description_label"
                 android:layout_marginBottom="10dp"
                 android:textColor="#0A1458"
                 android:textSize="19sp" />
 
             <EditText
-                android:id="@+id/descTask"
+                android:id="@+id/etDescTask"
                 android:background="@drawable/input_field_task"
                 android:inputType="textMultiLine"
                 android:paddingLeft="7dp"
                 android:textColorHint="#B8A3A3"
                 android:textColor="#000"
                 android:maxLength="90"
-                android:text="@string/edit_description_content"
+                android:hint="@string/description_placeholder"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"/>
 
@@ -110,7 +110,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/editdateTv"
+                android:id="@+id/adddate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/target_date_label"
@@ -122,19 +122,21 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="47dp">
+
                 <EditText
-                    android:id="@+id/dateTask"
-                    android:layout_width="260dp"
+                    android:id="@+id/etDateTask"
+                    android:layout_width="280dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/input_field_task"
-                    android:text="@string/target_date_content"
+                    android:hint="@string/date_placeholder"
                     android:inputType="date"
                     android:paddingLeft="7dp"
                     android:textColor="#000"
                     android:textColorHint="#B8A3A3"
                     tools:ignore="MissingConstraints"
-                    android:editable="false"
+                    android:enabled="false"
                     tools:layout_editor_absoluteY="2dp" />
+
 
                 <ImageButton
                     android:id="@+id/datePickerBtn"
@@ -144,7 +146,8 @@
                     android:datePickerMode="calendar"
                     android:background="?attr/colorPrimarySurface"
                     tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteY="2dp" />
+                    tools:layout_editor_absoluteY="2dp"
+                    tools:targetApi="lollipop" />
 
             </LinearLayout>
         </LinearLayout>
@@ -152,24 +155,25 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/updateTaskBtn"
+        android:id="@+id/createTaskBtn"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginHorizontal="17dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/create_btn"
         android:fontFamily="sans-serif-medium"
-        android:text="Save Update"
+        android:text="@string/create_task_btn"
         android:textColor="#FFF"
         android:textStyle="bold" />
     <Button
-        android:id="@+id/deleteTaskBtn"
+        android:id="@+id/cancelBtn"
         android:layout_marginHorizontal="17dp"
-        android:layout_marginTop="16dp"
-        android:textColor="#fff"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/secondaryTextBtn"
         android:textStyle="bold"
-        android:text="DELETE"
-        android:background="@drawable/delete_btn"
+        android:text="@string/cancelBtn"
+        android:background="@drawable/cancel_btn"
+        android:shadowColor="?attr/colorPrimarySurface"
         android:layout_width="match_parent"
         android:layout_height="52dp"/>
 

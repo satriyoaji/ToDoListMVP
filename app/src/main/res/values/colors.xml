@@ -43,5 +43,7 @@
     <color name="secondaryTextBtn">#AFAFAF</color>
     <color name="bloodColor">#F5D80911</color>
     <color name="brightRed">#DAFF0008</color>
+    <color name="textSecondary">#F2888888</color>
+    <color name="bgApp">#A3E1F0E7</color>
 
 </resources>

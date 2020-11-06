@@ -2,6 +2,7 @@ package todolistmvp.modul.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,6 @@ public class LoginFragment extends BaseFragment<LoginActivity, LoginContract.Pre
     EditText etPassword;
     Button btnLogin;
     public static final String KEY_EMAIL = "EMAIL_KEY";
-    public static final String KEY_PASSWORD = "PASSWORD_KEY";
 
     public LoginFragment() {
     }
@@ -61,7 +61,12 @@ public class LoginFragment extends BaseFragment<LoginActivity, LoginContract.Pre
     }
 
     @Override
-    public void redirectToProfile() {
+    public void logout() {
+
+    }
+
+    @Override
+    public void redirectToHome() {
         Intent intent = new Intent(activity, HomeActivity.class);
         intent.putExtra(KEY_EMAIL, etEmail.getText().toString());
         startActivity(intent);
