@@ -10,9 +10,11 @@ public interface HomeContract {
     interface View extends BaseView<Presenter> {
         void createNewTask();
         void editTask(String id);
+        void logout();
     }
 
     interface Presenter extends BasePresenter {
         ArrayList<Task> getDataSet();
+        void performLogout();
     }
 }

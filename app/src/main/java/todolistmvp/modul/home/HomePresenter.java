@@ -25,4 +25,9 @@ public class HomePresenter implements HomeContract.Presenter{
         data.add(new Task("3", "Task 3", "20 May 2020","Deskripsi task tiga", true));
         return data;
     }
+
+    @Override
+    public void performLogout() {
+
+    }
 }
