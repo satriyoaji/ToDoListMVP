@@ -10,11 +10,11 @@ public interface EditTaskContract {
         void setTaskId(String id);
         String getTaskId();
         void redirectToTaskList();
-        void deleteProcess(Task task);
+        void deleteProcess(String id);
     }
 
     interface Presenter extends BasePresenter {
-        void saveData(String id, String title, String date, String description);
+        void saveData(String title, String date, String description);
         void loadData(String id);
         void deleteData(String id);
     }

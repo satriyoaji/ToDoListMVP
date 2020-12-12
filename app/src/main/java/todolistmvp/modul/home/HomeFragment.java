@@ -22,11 +22,15 @@ import java.util.Locale;
 
 import todolistmvp.base.BaseFragment;
 import todolistmvp.data.model.Task;
+import todolistmvp.data.source.local.TaskTableHandler;
+import todolistmvp.data.source.session.TaskSessionRepository;
 import todolistmvp.modul.R;
 import todolistmvp.modul.edittask.EditTaskActivity;
 import todolistmvp.modul.login.LoginActivity;
 import todolistmvp.modul.newtask.NewTaskActivity;
 import todolistmvp.utils.RecyclerViewAdapterTodolist;
+
+import static todolistmvp.modul.R.id.recyclerViewTodoList;
 
 
 public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presenter> implements HomeContract.View {
@@ -48,7 +52,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
-        mPresenter = new HomePresenter(this);
+        mPresenter = new HomePresenter(this, new TaskSessionRepository(getActivity()), new TaskTableHandler(getActivity()));
         mPresenter.start();
         setTitle(getResources().getString(R.string.app_name));
 
@@ -62,7 +66,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         String date = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date());
         nowdate.setText(date);
 
-        mRecyclerView = fragmentView.findViewById(R.id.recyclerViewTodoList);
+        mRecyclerView = fragmentView.findViewById(recyclerViewTodoList);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(activity);
         mRecyclerView.setLayoutManager(mLayoutManager);

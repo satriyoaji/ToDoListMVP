@@ -2,7 +2,7 @@ package todolistmvp.modul.login;
 
 
 import todolistmvp.data.model.User;
-import todolistmvp.data.source.SessionRepository;
+import todolistmvp.data.source.session.SessionRepository;
 
 public class LoginPresenter implements LoginContract.Presenter{
     private final LoginContract.View view;
@@ -16,7 +16,7 @@ public class LoginPresenter implements LoginContract.Presenter{
     @Override
     public void start() {
         if(sessionRepository.getSessionData() != null){
-            view.redirectToHome();  //jika sudah login langsung masuk home
+            view.redirectToHome(((User) sessionRepository.getSessionData()).getEmail());  //jika sudah login langsung masuk home
         }
     }
 
@@ -29,7 +29,7 @@ public class LoginPresenter implements LoginContract.Presenter{
         sessionRepository.setSessionData(loggedUser);
 
         // call redirect to home
-        view.redirectToHome();
+        view.redirectToHome(((User) sessionRepository.getSessionData()).getEmail());
     }
 
 }

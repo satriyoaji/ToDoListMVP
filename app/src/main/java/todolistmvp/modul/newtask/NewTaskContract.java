@@ -9,6 +9,6 @@ public interface NewTaskContract {
     }
 
     interface Presenter extends BasePresenter {
-        void saveData(String id, String title, String date, String description);
+        void saveData(String title, String date, String description);
     }
 }

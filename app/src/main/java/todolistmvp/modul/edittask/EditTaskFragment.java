@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import java.util.Locale;
 
 import todolistmvp.base.BaseFragment;
 import todolistmvp.data.model.Task;
+import todolistmvp.data.source.local.TaskTableHandler;
 import todolistmvp.modul.R;
 import todolistmvp.modul.home.HomeActivity;
 import todolistmvp.modul.login.LoginActivity;
@@ -43,7 +45,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         fragmentView = inflater.inflate(R.layout.fragment_edit_task, container, false);
-        mPresenter = new EditTaskPresenter(this);
+        mPresenter = new EditTaskPresenter(this, new TaskTableHandler(getActivity()));
         mPresenter.start();
         setTitle(getResources().getString(R.string.edit_task_details));
 
@@ -63,7 +65,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
 
             @Override
             public void onClick(View v) {
-                mPresenter.deleteData(id);
+                deleteProcess(id);
             }
         });
 
@@ -135,7 +137,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         String title = etTitleTask.getText().toString();
         String date = etDateTask.getText().toString();
         String description = etDescTask.getText().toString();
-        mPresenter.saveData(this.id,title,date,description);
+        mPresenter.saveData(title,date,description);
 
         Toast.makeText(getContext(), "The task has successfully updated!", Toast.LENGTH_LONG).show();
         redirectToTaskList();
@@ -149,7 +151,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
     }
 
     @Override
-    public void deleteProcess(final Task task) {
+    public void deleteProcess(final String id) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.delete_dialog, null);
 
@@ -164,7 +166,8 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         accDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), ("Task "+ task.getId() +" has successfully deleted!"), Toast.LENGTH_LONG).show();
+                mPresenter.deleteData(id);
+                Toast.makeText(getContext(), ("Task "+ id +" has successfully deleted!"), Toast.LENGTH_LONG).show();
                 redirectToTaskList();
             }
         });

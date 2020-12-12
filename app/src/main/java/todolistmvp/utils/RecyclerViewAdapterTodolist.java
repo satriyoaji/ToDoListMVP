@@ -51,7 +51,11 @@ public class RecyclerViewAdapterTodolist extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tvTitle.setText(mDataset.get(position).getTitle());
         holder.tvDate.setText(mDataset.get(position).getDate());
-        holder.checked.setChecked(mDataset.get(position).getCheck());
+        if(mDataset.get(position).getCheck() == 1)
+            holder.checked.setChecked(true);
+        else if(mDataset.get(position).getCheck() == 0)
+            holder.checked.setChecked(false);
+
     }
 
     @Override

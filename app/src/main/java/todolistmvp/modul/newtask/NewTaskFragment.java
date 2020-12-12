@@ -19,6 +19,8 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import todolistmvp.base.BaseFragment;
+import todolistmvp.data.source.local.TaskTableHandler;
+import todolistmvp.data.source.session.TaskSessionRepository;
 import todolistmvp.modul.R;
 import todolistmvp.modul.home.HomeActivity;
 import todolistmvp.modul.login.LoginActivity;
@@ -40,7 +42,7 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         fragmentView = inflater.inflate(R.layout.fragment_new_task, container, false);
-        mPresenter = new NewTaskPresenter(this);
+        mPresenter = new NewTaskPresenter(this, new TaskSessionRepository(getActivity()), new TaskTableHandler(getActivity()));
         mPresenter.start();
         setTitle(getResources().getString(R.string.add_new_task_title));
 
@@ -116,7 +118,7 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
         String title = etTitleTask.getText().toString();
         String desc = etDescTask.getText().toString();
         String date = etDateTask.getText().toString();
-        mPresenter.saveData("9",title,desc,date);
+        mPresenter.saveData(title,date,desc);
 
         Toast.makeText(getContext(), "The task has successfully added!", Toast.LENGTH_LONG).show();
         redirectToTaskList();

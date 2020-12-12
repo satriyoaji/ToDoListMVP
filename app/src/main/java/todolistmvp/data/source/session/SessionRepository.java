@@ -1,4 +1,4 @@
-package todolistmvp.data.source;
+package todolistmvp.data.source.session;
 
 public interface SessionRepository<T> {
     public final String SHARED_PREFERENCE_NAME = "SessionSharedPreferences";

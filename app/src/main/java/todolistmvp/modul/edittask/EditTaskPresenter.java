@@ -2,13 +2,16 @@ package todolistmvp.modul.edittask;
 
 
 import todolistmvp.data.model.Task;
+import todolistmvp.data.source.local.TableHandler;
 
 public class EditTaskPresenter implements EditTaskContract.Presenter{
     private final EditTaskContract.View view;
-//    private String id;
+    private final TableHandler tableHandler;
+    Task editedTask;
 
-    public EditTaskPresenter(EditTaskContract.View view) {
+    public EditTaskPresenter(EditTaskContract.View view, TableHandler tableHandler) {
         this.view = view;
+        this.tableHandler = tableHandler;
     }
 
     @Override
@@ -17,27 +20,29 @@ public class EditTaskPresenter implements EditTaskContract.Presenter{
     }
 
     @Override
-    public void saveData(final String id, final String title, final String date, final String description){
-        //update task
-        Task newTask = new Task(id, title, date, description, false);
-        //then go back to task list
+    public void saveData(final String title, final String date, final String description){
+        editedTask.setTitle(title);
+        editedTask.setDesc(description);
+        editedTask.setDate(date);
+        editedTask.setCheck(editedTask.getCheck());
+
+        tableHandler.update(editedTask);
+
         view.redirectToTaskList();
     }
 
     @Override
     public void loadData(String id) {
         //load data task by id
+        editedTask = (Task) tableHandler.readById(id);
         //then send data to fragment
-        Task task = new Task("4", "title of taskIndex:"+id, "date of taskIndex:"+id, "description of taskIndex:"+id, false);
-        view.showData(task);
+        view.showData(editedTask);
     }
 
     @Override
     public void deleteData(String id) {
-        //get data by id
-        //then remove data from DB
-        Task task = new Task("4", "title of taskIndex:"+id, "date of taskIndex:"+id, "description of taskIndex:"+id, false);
-        view.deleteProcess(task);
+        editedTask = (Task) tableHandler.readById(id);
+        tableHandler.delete(editedTask);
     }
 
 }
