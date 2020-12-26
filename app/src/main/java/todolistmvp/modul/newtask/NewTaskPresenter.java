@@ -25,6 +25,7 @@ public class NewTaskPresenter implements NewTaskContract.Presenter{
         Task newTask = new Task(title, date, description, 0);
         //save new task
         tableHandler.create(newTask);
+        System.out.println("sukses menambahkan");
 
         //then go back to task list
         view.redirectToTaskList();

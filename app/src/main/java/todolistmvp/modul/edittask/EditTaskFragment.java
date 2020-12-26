@@ -130,6 +130,8 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
 
     @Override
     public void redirectToTaskList() {
+        Intent intent = new Intent(activity, HomeActivity.class);
+        startActivity(intent);
         activity.finish();
     }
 

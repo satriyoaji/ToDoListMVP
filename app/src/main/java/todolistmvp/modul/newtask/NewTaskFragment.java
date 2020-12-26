@@ -109,6 +109,8 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
     }
 
     public void redirectToTaskList() {
+        Intent intent = new Intent(activity, HomeActivity.class);
+        startActivity(intent);
         activity.finish();
     }
 

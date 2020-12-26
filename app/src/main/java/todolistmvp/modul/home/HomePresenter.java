@@ -39,6 +39,7 @@ public class HomePresenter implements HomeContract.Presenter{
             updatedTask.setCheck(1);
         else //uncheck
             updatedTask.setCheck(0);
+        System.out.println("cek " + isChecked.toString() + " jadi " + updatedTask.getCheck());
 
         tableHandler.update(updatedTask);
     }

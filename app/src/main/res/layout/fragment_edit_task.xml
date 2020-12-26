@@ -164,15 +164,14 @@
                                 android:src="@android:drawable/ic_menu_my_calendar"
                                 tools:ignore="MissingConstraints"
                                 tools:layout_editor_absoluteY="2dp" />
-
-
                         </LinearLayout>
+
                         <Button
                             android:id="@+id/shareBtn"
                             android:layout_marginTop="20dp"
                             android:textColor="@color/secondaryTextBtn"
                             android:textStyle="bold"
-                            android:text="Share this note"
+                            android:text="Share this task"
                             android:background="@drawable/cancel_btn"
                             android:shadowColor="?attr/colorPrimarySurface"
                             android:layout_width="match_parent"
