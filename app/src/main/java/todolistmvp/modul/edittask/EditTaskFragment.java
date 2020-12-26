@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -35,7 +37,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
     private EditText etTitleTask, etDescTask, etDateTask;
     private String id;
     private ImageButton datePickerBtn;
-    private Button updateTaskBtn, deleteTaskBtn;
+    private Button updateTaskBtn, deleteTaskBtn, shareBtn;
 
     public EditTaskFragment() {
     }
@@ -56,6 +58,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         datePickerBtn = fragmentView.findViewById(R.id.datePickerBtn);
         updateTaskBtn = fragmentView.findViewById(R.id.updateTaskBtn);
         deleteTaskBtn = fragmentView.findViewById(R.id.deleteTaskBtn);
+        shareBtn = fragmentView.findViewById(R.id.shareBtn);
 
         //get Value from selected task
         mPresenter.loadData(this.id);
@@ -76,6 +79,13 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
             }
         });
 
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareTask();
+            }
+        });
+
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         datePickerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +95,24 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         });
 
         return fragmentView;
+    }
+
+    private void shareTask() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(Html.fromHtml(new StringBuilder()
+                .append("<html>")
+                .append("<bold>To Do List </bold> ")
+                .append("<br/>")
+                .append("<bold>Title: </bold> " + etTitleTask.getText().toString())
+                .append("<br/>")
+                .append("<bold>Description: </bold> " + etDescTask.getText().toString())
+                .append("<br/>")
+                .append("<bold>Goals date: </bold> " + etDateTask.getText().toString())
+                .append("<br/></html>").toString()))
+        );
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 
     @Override
@@ -102,8 +130,6 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
 
     @Override
     public void redirectToTaskList() {
-        Intent intent = new Intent(activity, HomeActivity.class);
-        startActivity(intent);
         activity.finish();
     }
 
@@ -112,7 +138,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         Intent intent = new Intent(activity, LoginActivity.class);
         //process logout logic
         startActivity(intent);
-        activity.finish();
+        activity.finishAffinity();
     }
 
     public void showDateDialog() {

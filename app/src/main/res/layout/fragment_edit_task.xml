@@ -25,6 +25,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
+
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -166,6 +167,17 @@
 
 
                         </LinearLayout>
+                        <Button
+                            android:id="@+id/shareBtn"
+                            android:layout_marginTop="20dp"
+                            android:textColor="@color/secondaryTextBtn"
+                            android:textStyle="bold"
+                            android:text="Share this note"
+                            android:background="@drawable/cancel_btn"
+                            android:shadowColor="?attr/colorPrimarySurface"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginHorizontal="40dp"/>
                     </LinearLayout>
 
                 </LinearLayout>

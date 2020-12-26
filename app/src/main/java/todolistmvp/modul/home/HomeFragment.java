@@ -85,8 +85,13 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
             @Override
             public void onItemClick(int position, View v) {
                 String id = data.get(position).getId();
-                Log.d("BELAJAR ACTIVITY",">>>>>"+ position);
                 editTask(id);
+            }
+
+            @Override
+            public void onSelected(int position, Boolean isChecked) {
+                String id = data.get(position).getId();
+                mPresenter.updateChecked(id, isChecked);
             }
         });
 
@@ -102,7 +107,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
     public void logout() {
         Intent intent = new Intent(activity, LoginActivity.class);
         startActivity(intent);
-        activity.finish();
+        activity.finishAffinity();
     }
 
     @Override

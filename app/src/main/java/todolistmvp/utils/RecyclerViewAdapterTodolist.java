@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +18,7 @@ public class RecyclerViewAdapterTodolist extends RecyclerView.Adapter<RecyclerVi
     private static ArrayList<Task> mDataset;
     private static MyClickListener myClickListener;
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CheckBox.OnCheckedChangeListener{
         TextView tvTitle;
         TextView tvDate;
         CheckBox checked;
@@ -26,6 +27,7 @@ public class RecyclerViewAdapterTodolist extends RecyclerView.Adapter<RecyclerVi
             tvTitle = (TextView) itemView.findViewById(R.id.titledoes);
             tvDate = (TextView) itemView.findViewById(R.id.datedoes);
             checked = (CheckBox) itemView.findViewById(R.id.checkdoes);
+            checked.setOnCheckedChangeListener(this);
             itemView.setOnClickListener(this);
         }
 
@@ -33,6 +35,12 @@ public class RecyclerViewAdapterTodolist extends RecyclerView.Adapter<RecyclerVi
         public void onClick(View view) {
             int position = getAdapterPosition();
             myClickListener.onItemClick(position, view);
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            int position = getAdapterPosition();
+            myClickListener.onSelected(position, isChecked);
         }
     }
 
@@ -68,6 +76,7 @@ public class RecyclerViewAdapterTodolist extends RecyclerView.Adapter<RecyclerVi
     }
     public interface MyClickListener {
         public void onItemClick(int position, View v);
+        public void onSelected(int position, Boolean isChecked);
     }
 
 }

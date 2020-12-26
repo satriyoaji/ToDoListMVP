@@ -87,7 +87,7 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
     public void logout() {
         Intent intent = new Intent(activity, LoginActivity.class);
         startActivity(intent);
-        activity.finish();
+        activity.finishAffinity();
     }
 
     public void showDateDialog() {
@@ -109,8 +109,6 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
     }
 
     public void redirectToTaskList() {
-        Intent intent = new Intent(activity, HomeActivity.class);
-        startActivity(intent);
         activity.finish();
     }
 

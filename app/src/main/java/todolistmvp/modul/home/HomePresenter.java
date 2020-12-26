@@ -4,6 +4,7 @@ package todolistmvp.modul.home;
 import java.util.ArrayList;
 
 import todolistmvp.data.model.Task;
+import todolistmvp.data.source.local.DatabaseContract;
 import todolistmvp.data.source.local.TableHandler;
 import todolistmvp.data.source.session.SessionRepository;
 
@@ -28,6 +29,18 @@ public class HomePresenter implements HomeContract.Presenter{
         ArrayList<Task> data = tableHandler.readAll();
 
         return data;
+    }
+
+    @Override
+    public void updateChecked(String id, Boolean isChecked) {
+        Task updatedTask = (Task) tableHandler.readById(id);
+
+        if(isChecked) //to check
+            updatedTask.setCheck(1);
+        else //uncheck
+            updatedTask.setCheck(0);
+
+        tableHandler.update(updatedTask);
     }
 
     @Override

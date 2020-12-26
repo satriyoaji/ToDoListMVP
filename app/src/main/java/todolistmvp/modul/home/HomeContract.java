@@ -15,6 +15,7 @@ public interface HomeContract {
 
     interface Presenter extends BasePresenter {
         ArrayList<Task> getDataSet();
+        void updateChecked(String id, Boolean isChecked);
         void performLogout();
     }
 }
