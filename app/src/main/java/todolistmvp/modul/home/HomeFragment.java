@@ -2,6 +2,7 @@ package todolistmvp.modul.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -44,6 +47,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
     private RecyclerView.LayoutManager mLayoutManager;
     private SearchView searchTask;
     private FirebaseUser user;
+    private GoogleSignInAccount account;
 
     public HomeFragment() {
     }
@@ -55,7 +59,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
         mPresenter = new HomePresenter(this, new TaskSessionRepository(getActivity()), new TaskTableHandler(getActivity()));
         user = FirebaseAuth.getInstance().getCurrentUser();
-
+        account = GoogleSignIn.getLastSignedInAccount(getContext());
         initView();
 
         return fragmentView;
@@ -72,7 +76,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         newListBtn = fragmentView.findViewById(R.id.newListBtn);
         searchTask = fragmentView.findViewById(R.id.searchTask);
 
-        username.setText(user.getEmail());
+        setUsername();
         String date = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date());
         nowdate.setText(date);
 
@@ -100,6 +104,13 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
             }
         });
 
+    }
+
+    private void setUsername() {
+        if(account == null)
+            username.setText(user.getEmail());
+        else
+            username.setText(account.getDisplayName());
     }
 
     @Override
