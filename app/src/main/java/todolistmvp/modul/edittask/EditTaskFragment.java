@@ -30,14 +30,14 @@ import todolistmvp.modul.home.HomeActivity;
 import todolistmvp.modul.login.LoginActivity;
 
 
-public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskContract.Presenter> implements EditTaskContract.View {
+public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskContract.Presenter> implements EditTaskContract.View, View.OnClickListener {
 
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
     private EditText etTitleTask, etDescTask, etDateTask;
     private String id;
     private ImageButton datePickerBtn;
-    private Button updateTaskBtn, deleteTaskBtn, shareBtn;
+    private Button updateTaskBtn, deleteTaskBtn, shareBtn, accDeleteBtn, cancelBtnTask;
 
     public EditTaskFragment() {
     }
@@ -48,6 +48,14 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         super.onCreateView(inflater, container, savedInstanceState);
         fragmentView = inflater.inflate(R.layout.fragment_edit_task, container, false);
         mPresenter = new EditTaskPresenter(this, new TaskTableHandler(getActivity()));
+
+        initView();
+
+        return fragmentView;
+    }
+
+    @Override
+    public void initView() {
         mPresenter.start();
         setTitle(getResources().getString(R.string.edit_task_details));
 
@@ -63,38 +71,12 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         //get Value from selected task
         mPresenter.loadData(this.id);
 
-        deleteTaskBtn.setOnClickListener(new View.OnClickListener() {
-            private String id = getTaskId();
-
-            @Override
-            public void onClick(View v) {
-                deleteProcess(id);
-            }
-        });
-
-        updateTaskBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveChangeTask();
-            }
-        });
-
-        shareBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareTask();
-            }
-        });
+        deleteTaskBtn.setOnClickListener(this);
+        updateTaskBtn.setOnClickListener(this);
+        shareBtn.setOnClickListener(this);
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-        datePickerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDateDialog();
-            }
-        });
-
-        return fragmentView;
+        datePickerBtn.setOnClickListener(this);
     }
 
     private void shareTask() {
@@ -183,27 +165,38 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.delete_dialog, null);
 
-        Button accDeleteBtn = view.findViewById(R.id.accDeleteBtn);
-        Button cancelBtnTask = view.findViewById(R.id.cancelBtnTask);
+        accDeleteBtn = view.findViewById(R.id.accDeleteBtn);
+        cancelBtnTask = view.findViewById(R.id.cancelBtnTask);
 
         final AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setView(view)
                 .create();
         alertDialog.show();
 
-        accDeleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.deleteData(id);
-                Toast.makeText(getContext(), ("Task "+ id +" has successfully deleted!"), Toast.LENGTH_LONG).show();
-                redirectToTaskList();
-            }
-        });
+        accDeleteBtn.setOnClickListener(this);
         cancelBtnTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == deleteTaskBtn.getId()) {
+            String id = getTaskId();
+            deleteProcess(id);
+        } else if (view.getId() == updateTaskBtn.getId()) {
+            saveChangeTask();
+        } else if (view.getId() == shareBtn.getId()) {
+            shareTask();
+        } else if (view.getId() == datePickerBtn.getId()) {
+            showDateDialog();
+        } else if (view.getId() == accDeleteBtn.getId()) {
+            mPresenter.deleteData(id);
+            Toast.makeText(getContext(), ("Task " + id + " has successfully deleted!"), Toast.LENGTH_LONG).show();
+            redirectToTaskList();
+        }
     }
 }

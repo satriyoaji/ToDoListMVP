@@ -26,7 +26,7 @@ import todolistmvp.modul.home.HomeActivity;
 import todolistmvp.modul.login.LoginActivity;
 
 
-public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContract.Presenter> implements NewTaskContract.View {
+public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContract.Presenter> implements NewTaskContract.View, View.OnClickListener {
 
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
@@ -43,6 +43,14 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
         super.onCreateView(inflater, container, savedInstanceState);
         fragmentView = inflater.inflate(R.layout.fragment_new_task, container, false);
         mPresenter = new NewTaskPresenter(this, new TaskSessionRepository(getActivity()), new TaskTableHandler(getActivity()));
+
+        initView();
+
+        return fragmentView;
+    }
+
+    @Override
+    public void initView() {
         mPresenter.start();
         setTitle(getResources().getString(R.string.add_new_task_title));
 
@@ -53,29 +61,10 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
         createTaskBtn = fragmentView.findViewById(R.id.createTaskBtn);
         cancelBtn = fragmentView.findViewById(R.id.cancelBtn);
 
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                redirectToTaskList();
-            }
-        });
-
-        createTaskBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveTask();
-            }
-        });
-
+        cancelBtn.setOnClickListener(this);
+        createTaskBtn.setOnClickListener(this);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-        datePickerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDateDialog();
-            }
-        });
-
-        return fragmentView;
+        datePickerBtn.setOnClickListener(this);
     }
 
     @Override
@@ -124,4 +113,13 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
         redirectToTaskList();
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == cancelBtn.getId())
+            redirectToTaskList();
+        else if(v.getId() == createTaskBtn.getId())
+            saveTask();
+        else if(v.getId() == datePickerBtn.getId())
+            showDateDialog();
+    }
 }

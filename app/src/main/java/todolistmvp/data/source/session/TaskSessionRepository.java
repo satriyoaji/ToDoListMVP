@@ -50,7 +50,6 @@ public class TaskSessionRepository implements SessionRepository<Task>{
 
     @Override
     public void update(Task sessionData) {
-
         destroy();
         setSessionData(sessionData);
     }

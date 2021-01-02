@@ -21,7 +21,7 @@ public class HomePresenter implements HomeContract.Presenter{
 
     @Override
     public void start() {
-
+        view.greetings();
     }
 
     public ArrayList<Task> getDataSet() {

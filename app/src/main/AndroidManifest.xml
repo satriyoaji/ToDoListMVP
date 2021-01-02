@@ -12,6 +12,7 @@
         <activity android:name=".home.HomeActivity"/>
         <activity android:name=".newtask.NewTaskActivity"/>
         <activity android:name=".edittask.EditTaskActivity"/>
+        <activity android:name=".register.RegisterActivity"/>
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -26,9 +26,6 @@ public class HomeActivity extends BaseFragmentHolderActivity {
         });
 
         setCurrentFragment(homeFragment, false);
-
-        String emailText = getIntent().getStringExtra(LoginFragment.KEY_EMAIL);
-        homeFragment.setUsername(emailText);
     }
 
 }

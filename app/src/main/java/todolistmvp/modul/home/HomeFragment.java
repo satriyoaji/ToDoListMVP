@@ -2,21 +2,23 @@ package todolistmvp.modul.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -33,16 +35,15 @@ import todolistmvp.utils.RecyclerViewAdapterTodolist;
 import static todolistmvp.modul.R.id.recyclerViewTodoList;
 
 
-public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presenter> implements HomeContract.View {
+public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presenter> implements HomeContract.View, View.OnClickListener {
 
-    private TextView welcometitle;
-    private TextView nowdate;
+    private TextView greetings, nowdate, username;
     private Button newListBtn;
     RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private SearchView searchTask;
-    private String username;
+    private FirebaseUser user;
 
     public HomeFragment() {
     }
@@ -53,16 +54,25 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         super.onCreateView(inflater, container, savedInstanceState);
         fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
         mPresenter = new HomePresenter(this, new TaskSessionRepository(getActivity()), new TaskTableHandler(getActivity()));
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        initView();
+
+        return fragmentView;
+    }
+
+    @Override
+    public void initView() {
         mPresenter.start();
         setTitle(getResources().getString(R.string.app_name));
 
-        welcometitle = fragmentView.findViewById(R.id.welcometitle);
+        greetings = (TextView) fragmentView.findViewById(R.id.greetingTitle);
+        username = fragmentView.findViewById(R.id.username);
         nowdate = fragmentView.findViewById(R.id.nowdate);
         newListBtn = fragmentView.findViewById(R.id.newListBtn);
         searchTask = fragmentView.findViewById(R.id.searchTask);
 
-        welcometitle.setText("Hello"+ (username == null ? "!" : (", " + username) ));
-
+        username.setText(user.getEmail());
         String date = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date());
         nowdate.setText(date);
 
@@ -74,12 +84,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         mAdapter = new RecyclerViewAdapterTodolist(data);
         mRecyclerView.setAdapter(mAdapter);
 
-        newListBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createNewTask();
-            }
-        });
+        newListBtn.setOnClickListener(this);
 
         ((RecyclerViewAdapterTodolist) mAdapter).setOnItemClickListener(new RecyclerViewAdapterTodolist.MyClickListener() {
             @Override
@@ -95,7 +100,6 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
             }
         });
 
-        return fragmentView;
     }
 
     @Override
@@ -122,9 +126,26 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         startActivity(intent);
     }
 
-    public void setUsername(String username) {
-        //set username view from email (depends on user's email in DB)
-        this.username = username;
+    @Override
+    public void greetings() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+        System.out.println("waktu "+ timeOfDay);
+
+        if(timeOfDay >= 0 && timeOfDay < 12){
+//            greetings.setText("Good Morning");
+        }else if(timeOfDay >= 12 && timeOfDay < 16){
+//            greetings.setText("Good Afternoon");
+        }else if(timeOfDay >= 16 && timeOfDay < 20){
+//            greetings.setText("Good Evening");
+        }else if(timeOfDay >= 20 && timeOfDay < 24){
+//            greetings.setText("Good Night");
+        }
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == newListBtn.getId())
+            createNewTask();
+    }
 }
