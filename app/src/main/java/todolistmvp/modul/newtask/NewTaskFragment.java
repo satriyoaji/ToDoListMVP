@@ -51,7 +51,6 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
 
     @Override
     public void initView() {
-        mPresenter.start();
         setTitle(getResources().getString(R.string.add_new_task_title));
 
         etTitleTask = fragmentView.findViewById(R.id.etTitleTask);
@@ -65,6 +64,8 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
         createTaskBtn.setOnClickListener(this);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         datePickerBtn.setOnClickListener(this);
+
+        mPresenter.start();
     }
 
     @Override

@@ -56,7 +56,6 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
 
     @Override
     public void initView() {
-        mPresenter.start();
         setTitle(getResources().getString(R.string.edit_task_details));
 
         etTitleTask = fragmentView.findViewById(R.id.etTitleTask);
@@ -68,6 +67,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         deleteTaskBtn = fragmentView.findViewById(R.id.deleteTaskBtn);
         shareBtn = fragmentView.findViewById(R.id.shareBtn);
 
+        mPresenter.start();
         //get Value from selected task
         mPresenter.loadData(this.id);
 
@@ -84,7 +84,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(Html.fromHtml(new StringBuilder()
                 .append("<html>")
-                .append("<bold>To Do List </bold> ")
+                .append("<bold>My To Do List </bold> ")
                 .append("<br/>")
                 .append("<bold>Title: </bold> " + etTitleTask.getText().toString())
                 .append("<br/>")

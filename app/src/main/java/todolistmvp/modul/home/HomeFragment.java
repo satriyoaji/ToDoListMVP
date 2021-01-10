@@ -1,5 +1,6 @@
 package todolistmvp.modul.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +12,17 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -40,7 +46,7 @@ import todolistmvp.utils.RecyclerViewAdapterTodolist;
 import static todolistmvp.modul.R.id.recyclerViewTodoList;
 
 
-public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presenter> implements HomeContract.View, View.OnClickListener {
+public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presenter> implements HomeContract.View, View.OnClickListener, GoogleApiClient.OnConnectionFailedListener  {
 
     private TextView greetings, nowdate, username;
     private Button newListBtn;
@@ -50,6 +56,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
     private SearchView searchTask;
     private FirebaseUser user;
     private GoogleSignInAccount account;
+    private GoogleApiClient googleApiClient;
 
     public HomeFragment() {
     }
@@ -61,6 +68,16 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
         mPresenter = new HomePresenter(this, new TaskSessionRepository(getActivity()), new TaskTableHandler(getActivity()));
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        googleApiClient = new GoogleApiClient.Builder(getContext())
+                .enableAutoManage(activity, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        googleApiClient.connect();
         account = GoogleSignIn.getLastSignedInAccount(getContext());
         initView();
 
@@ -69,16 +86,16 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
 
     @Override
     public void initView() {
-        mPresenter.start();
         setTitle(getResources().getString(R.string.app_name));
 
-        greetings = (TextView) fragmentView.findViewById(R.id.greetingTitle);
+        greetings = fragmentView.findViewById(R.id.greetingTitle);
         username = fragmentView.findViewById(R.id.username);
         nowdate = fragmentView.findViewById(R.id.nowdate);
         newListBtn = fragmentView.findViewById(R.id.newListBtn);
         searchTask = fragmentView.findViewById(R.id.searchTask);
         mRecyclerView = fragmentView.findViewById(recyclerViewTodoList);
 
+        mPresenter.start();
         setUsername();
         String date = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date());
         nowdate.setText(date);
@@ -105,7 +122,6 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
                 mPresenter.updateChecked(id, isChecked);
             }
         });
-
     }
 
     private void setUsername() {
@@ -122,7 +138,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
 
     @Override
     public void exit() {
-        mPresenter.performLogout();
+        mPresenter.performLogout(googleApiClient);
         Toast.makeText(getContext(), "You're logged out!",
                 Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(activity, LoginActivity.class);
@@ -149,13 +165,13 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         System.out.println("waktu "+ timeOfDay);
 
         if(timeOfDay >= 0 && timeOfDay < 12){
-//            greetings.setText("Good Morning");
+            greetings.setText("Good Morning");
         }else if(timeOfDay >= 12 && timeOfDay < 16){
-//            greetings.setText("Good Afternoon");
+            greetings.setText("Good Afternoon");
         }else if(timeOfDay >= 16 && timeOfDay < 20){
-//            greetings.setText("Good Evening");
+            greetings.setText("Good Evening");
         }else if(timeOfDay >= 20 && timeOfDay < 24){
-//            greetings.setText("Good Night");
+            greetings.setText("Good Night");
         }
     }
 
@@ -163,5 +179,10 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
     public void onClick(View v) {
         if(v.getId() == newListBtn.getId())
             createNewTask();
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

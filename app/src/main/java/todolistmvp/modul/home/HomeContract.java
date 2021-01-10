@@ -1,5 +1,9 @@
 package todolistmvp.modul.home;
 
+import androidx.annotation.Nullable;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import java.util.ArrayList;
 
 import todolistmvp.base.BasePresenter;
@@ -17,6 +21,6 @@ public interface HomeContract {
     interface Presenter extends BasePresenter {
         ArrayList<Task> getDataSet();
         void updateChecked(String id, Boolean isChecked);
-        void performLogout();
+        void performLogout(@Nullable GoogleApiClient googleApiClient);
     }
 }
