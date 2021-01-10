@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ import todolistmvp.base.BaseFragment;
 import todolistmvp.data.model.Task;
 import todolistmvp.data.source.local.TaskTableHandler;
 import todolistmvp.data.source.session.TaskSessionRepository;
+import todolistmvp.data.source.session.UserSessionRepository;
 import todolistmvp.modul.R;
 import todolistmvp.modul.edittask.EditTaskActivity;
 import todolistmvp.modul.login.LoginActivity;
@@ -75,12 +77,12 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         nowdate = fragmentView.findViewById(R.id.nowdate);
         newListBtn = fragmentView.findViewById(R.id.newListBtn);
         searchTask = fragmentView.findViewById(R.id.searchTask);
+        mRecyclerView = fragmentView.findViewById(recyclerViewTodoList);
 
         setUsername();
         String date = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date());
         nowdate.setText(date);
 
-        mRecyclerView = fragmentView.findViewById(recyclerViewTodoList);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(activity);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -119,7 +121,10 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
     }
 
     @Override
-    public void logout() {
+    public void exit() {
+        mPresenter.performLogout();
+        Toast.makeText(getContext(), "You're logged out!",
+                Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(activity, LoginActivity.class);
         startActivity(intent);
         activity.finishAffinity();

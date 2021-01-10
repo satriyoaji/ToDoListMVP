@@ -11,7 +11,7 @@ public interface HomeContract {
         void createNewTask();
         void editTask(String id);
         void greetings();
-        void logout();
+        void exit();
     }
 
     interface Presenter extends BasePresenter {

@@ -12,7 +12,7 @@ public class EditTaskActivity extends BaseFragmentHolderActivity {
     protected void initializeFragment() {
         initializeView();
 
-        btBack.setVisibility(View.VISIBLE);
+        btExit.setVisibility(View.VISIBLE);
         btOptionMenu.setVisibility(View.GONE);
         ivIcon.setVisibility(View.VISIBLE);
 
@@ -20,10 +20,10 @@ public class EditTaskActivity extends BaseFragmentHolderActivity {
         String id = getIntent().getStringExtra("TaskId");
 
         editTaskFragment.setTaskId(id);
-        btBack.setOnClickListener(new View.OnClickListener() {
+        btExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editTaskFragment.logout();
+                editTaskFragment.exit();
             }
         });
         setCurrentFragment(editTaskFragment, false);

@@ -70,7 +70,7 @@ public class RegisterFragment extends BaseFragment<RegisterActivity, RegisterCon
     }
 
     @Override
-    public void logout() {
+    public void exit() {
     }
 
     @Override

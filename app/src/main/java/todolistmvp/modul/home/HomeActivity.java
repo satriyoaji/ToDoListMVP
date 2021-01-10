@@ -3,7 +3,6 @@ package todolistmvp.modul.home;
 import android.view.View;
 
 import todolistmvp.base.BaseFragmentHolderActivity;
-import todolistmvp.modul.login.LoginFragment;
 
 
 public class HomeActivity extends BaseFragmentHolderActivity {
@@ -13,15 +12,15 @@ public class HomeActivity extends BaseFragmentHolderActivity {
     protected void initializeFragment() {
         initializeView();
 
-        btBack.setVisibility(View.VISIBLE);
-        btOptionMenu.setVisibility(View.GONE);
+        btExit.setVisibility(View.VISIBLE);
+        btOptionMenu.setVisibility(View.VISIBLE);
         ivIcon.setVisibility(View.VISIBLE);
 
         homeFragment = new HomeFragment();
-        btBack.setOnClickListener(new View.OnClickListener() {
+        btExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homeFragment.logout();
+                homeFragment.exit();
             }
         });
 

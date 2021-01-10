@@ -118,11 +118,8 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
     }
 
     @Override
-    public void logout() {
-        Intent intent = new Intent(activity, LoginActivity.class);
-        //process logout logic
-        startActivity(intent);
-        activity.finishAffinity();
+    public void exit() {
+        activity.finish();
     }
 
     public void showDateDialog() {

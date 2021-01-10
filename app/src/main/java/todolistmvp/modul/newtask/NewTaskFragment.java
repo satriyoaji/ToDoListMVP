@@ -73,10 +73,8 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
     }
 
     @Override
-    public void logout() {
-        Intent intent = new Intent(activity, LoginActivity.class);
-        startActivity(intent);
-        activity.finishAffinity();
+    public void exit() {
+        activity.finish();
     }
 
     public void showDateDialog() {

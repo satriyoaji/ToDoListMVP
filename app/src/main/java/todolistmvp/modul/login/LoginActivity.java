@@ -12,7 +12,7 @@ public class LoginActivity extends BaseFragmentHolderActivity {
     protected void initializeFragment() {
         initializeView();
 
-        btBack.setVisibility(View.GONE);
+        btExit.setVisibility(View.GONE);
         btOptionMenu.setVisibility(View.GONE);
 //        ivIcon.setImageResource(R.drawable.....);
         ivIcon.setVisibility(View.VISIBLE);

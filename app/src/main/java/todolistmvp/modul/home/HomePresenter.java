@@ -1,6 +1,10 @@
 package todolistmvp.modul.home;
 
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 import todolistmvp.data.model.Task;
@@ -12,6 +16,7 @@ public class HomePresenter implements HomeContract.Presenter{
     private final HomeContract.View view;
     private final SessionRepository sessionRepository;
     private final TableHandler tableHandler;
+    private GoogleApiClient googleApiClient;
 
     public HomePresenter(HomeContract.View view, SessionRepository sessionRepository, TableHandler tableHandler) {
         this.view = view;
@@ -46,6 +51,18 @@ public class HomePresenter implements HomeContract.Presenter{
 
     @Override
     public void performLogout() {
-
+        FirebaseAuth.getInstance().signOut();
+//        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+//                new ResultCallback<Status>() {
+//                    @Override
+//                    public void onResult(Status status) {
+//                        if (status.isSuccess()){
+//                            gotoMainActivity();
+//                        }else{
+//                            Toast.makeText(getApplicationContext(),"Session not close",Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//                });
+        sessionRepository.destroy();
     }
 }

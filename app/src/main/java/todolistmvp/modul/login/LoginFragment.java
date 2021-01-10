@@ -95,10 +95,9 @@ public class LoginFragment extends BaseFragment<LoginActivity, LoginContract.Pre
     }
 
     @Override
-    public void logout() {
+    public void exit() {
 
     }
-
 
     @Override
     public void redirectToHome() {

@@ -16,7 +16,7 @@ public abstract class BaseFragmentHolderActivity extends BaseActivity {
     protected FrameLayout flFragmentContainer;
     protected ImageButton btOptionMenu;
     protected ImageView ivIcon;
-    protected ImageButton btBack;
+    protected ImageButton btExit;
     protected View vMenuBarShadow;
     protected RelativeLayout rlActivityFragmentHolder;
 
@@ -28,11 +28,11 @@ public abstract class BaseFragmentHolderActivity extends BaseActivity {
         flFragmentContainer = (FrameLayout) findViewById(R.id.flFragmentContainer);
         btOptionMenu = (ImageButton) findViewById(R.id.btOptionMenu);
         ivIcon = (ImageView) findViewById(R.id.ivIcon);
-        btBack = (ImageButton) findViewById(R.id.btBack);
+        btExit = (ImageButton) findViewById(R.id.btBack);
         vMenuBarShadow = findViewById(R.id.vMenuBarShadow);
         rlActivityFragmentHolder = (RelativeLayout) findViewById(R.id.rlActivityFragmentHolder);
 
-        btBack.setOnClickListener(new View.OnClickListener() {
+        btExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
