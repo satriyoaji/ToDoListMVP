@@ -14,5 +14,6 @@ public final class DatabaseContract {
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_DATE = "task_date";
         public static final String COLUMN_CHECK = "checked";
+        public static final String COLUMN_USER = "user";
     }
 }

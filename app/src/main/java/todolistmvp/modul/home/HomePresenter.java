@@ -28,7 +28,6 @@ public class HomePresenter implements HomeContract.Presenter{
         this.view = view;
         this.sessionRepository = sessionRepository;
         this.tableHandler = tableHandler;
-
     }
 
     @Override
@@ -36,9 +35,9 @@ public class HomePresenter implements HomeContract.Presenter{
         view.greetings();
     }
 
-    public ArrayList<Task> getDataSet() {
+    public ArrayList<Task> getDataSet(String user) {
         //get Data from DB
-        ArrayList<Task> data = tableHandler.readAll();
+        ArrayList<Task> data = tableHandler.readByUser(user);
 
         return data;
     }

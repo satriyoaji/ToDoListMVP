@@ -19,7 +19,7 @@ public interface HomeContract {
     }
 
     interface Presenter extends BasePresenter {
-        ArrayList<Task> getDataSet();
+        ArrayList<Task> getDataSet(String user);
         void updateChecked(String id, Boolean isChecked);
         void performLogout(@Nullable GoogleApiClient googleApiClient);
     }

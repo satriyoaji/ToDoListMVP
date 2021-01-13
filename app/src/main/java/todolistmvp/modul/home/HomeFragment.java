@@ -103,7 +103,7 @@ public class HomeFragment extends BaseFragment<HomeActivity, HomeContract.Presen
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(activity);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        final ArrayList<Task> data = mPresenter.getDataSet();
+        final ArrayList<Task> data = mPresenter.getDataSet(user.getUid());
         mAdapter = new RecyclerViewAdapterTodolist(data);
         mRecyclerView.setAdapter(mAdapter);
 

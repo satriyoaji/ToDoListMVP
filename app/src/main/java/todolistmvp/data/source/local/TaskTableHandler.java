@@ -27,6 +27,7 @@ public class TaskTableHandler implements TableHandler<Task>{
         values.put(DatabaseContract.FeedTask.COLUMN_DESCRIPTION, task.getDesc());
         values.put(DatabaseContract.FeedTask.COLUMN_DATE, task.getDate());
         values.put(DatabaseContract.FeedTask.COLUMN_CHECK, task.getCheck());
+        values.put(DatabaseContract.FeedTask.COLUMN_USER, task.getUser());
 
         long newRowId = db.insert(DatabaseContract.FeedTask.TABLE_NAME, null, values);
     }
@@ -43,6 +44,7 @@ public class TaskTableHandler implements TableHandler<Task>{
                 DatabaseContract.FeedTask.COLUMN_DESCRIPTION,
                 DatabaseContract.FeedTask.COLUMN_DATE,
                 DatabaseContract.FeedTask.COLUMN_CHECK,
+                DatabaseContract.FeedTask.COLUMN_USER,
         };
 
         // Filter results WHERE "id" = id
@@ -72,7 +74,8 @@ public class TaskTableHandler implements TableHandler<Task>{
                 cursor.getString(1),    //title
                 cursor.getString(3),    //date
                 cursor.getString(2),    //desc
-                cursor.getInt(4)    //check
+                cursor.getInt(4),    //check
+                cursor.getString(5)    //user
         );//description
 
         return task;
@@ -95,14 +98,45 @@ public class TaskTableHandler implements TableHandler<Task>{
                         cursor.getString(1),    //title
                         cursor.getString(2),    //date
                         cursor.getString(3),    //desc
-                        cursor.getInt(4)    //check
+                        cursor.getInt(4),    //check
+                        cursor.getString(5)    //user
                 );//description
 
                 taskList.add(task);
             } while (cursor.moveToNext());
         }
 
-        // return contact list
+        // return task list
+        return taskList;
+    }
+
+    @Override
+    public ArrayList<Task> readByUser(String user) {
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + DatabaseContract.FeedTask.TABLE_NAME
+                + " WHERE " + DatabaseContract.FeedTask.COLUMN_USER + " = '" + user +"'";
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Task task = new Task(
+                        cursor.getLong(
+                                cursor.getColumnIndexOrThrow(DatabaseContract.FeedTask._ID))+"",
+                        cursor.getString(1),    //title
+                        cursor.getString(2),    //date
+                        cursor.getString(3),    //desc
+                        cursor.getInt(4),    //check
+                        cursor.getString(5)    //user
+                );//description
+
+                taskList.add(task);
+            } while (cursor.moveToNext());
+        }
+
+        // return task list
         return taskList;
     }
 
@@ -116,6 +150,7 @@ public class TaskTableHandler implements TableHandler<Task>{
         values.put(DatabaseContract.FeedTask.COLUMN_DESCRIPTION, task.getDesc());
         values.put(DatabaseContract.FeedTask.COLUMN_DATE, task.getDate());
         values.put(DatabaseContract.FeedTask.COLUMN_CHECK, task.getCheck());
+        values.put(DatabaseContract.FeedTask.COLUMN_USER, task.getUser());
 
         // Which row to update, based on the title
         String selection = DatabaseContract.FeedTask._ID + " LIKE ?";

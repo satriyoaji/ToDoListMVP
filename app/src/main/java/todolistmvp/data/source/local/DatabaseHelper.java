@@ -15,7 +15,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     DatabaseContract.FeedTask.COLUMN_TITLE + " TEXT, " +
                     DatabaseContract.FeedTask.COLUMN_DESCRIPTION + " TEXT, " +
                     DatabaseContract.FeedTask.COLUMN_DATE + " TEXT, " +
-                    DatabaseContract.FeedTask.COLUMN_CHECK + " INTEGER )";
+                    DatabaseContract.FeedTask.COLUMN_CHECK + " INTEGER, " +
+                    DatabaseContract.FeedTask.COLUMN_USER + " TEXT )";
 
     private static final String SQL_DELETE_TASK =
             "DROP TABLE IF EXISTS " + DatabaseContract.FeedTask.TABLE_NAME;
